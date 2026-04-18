@@ -1,0 +1,13 @@
+[Unit]
+Description=Wild Pines AI lid LED animation
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/wildpines-lid run
+ExecStop=%h/.local/bin/wildpines-lid restore-default
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=default.target

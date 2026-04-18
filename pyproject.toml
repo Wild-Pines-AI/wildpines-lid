@@ -1,0 +1,20 @@
+[project]
+name = "wildpines-lid"
+version = "0.1.0"
+description = "Wild Pines AI animation for the ROG Strix SCAR 18 AniMe Vision lid LED"
+requires-python = ">=3.12"
+dependencies = [
+    "hidapi>=0.14.0",
+    "pillow>=10.0.0",
+    "click>=8.1.0",
+]
+
+[project.scripts]
+wildpines-lid = "wildpines_lid.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["wildpines_lid"]

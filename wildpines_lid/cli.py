@@ -27,7 +27,7 @@ def main() -> None:
 @main.command("list-devices")
 def list_devices() -> None:
     """List HID interfaces for the lid device."""
-    import hid
+    import hidraw as hid
 
     devs = hid.enumerate(protocol.VENDOR_ID, protocol.PRODUCT_ID)
     if not devs:

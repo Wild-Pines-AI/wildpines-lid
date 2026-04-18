@@ -22,7 +22,10 @@ from dataclasses import dataclass
 
 VENDOR_ID = 0x0B05
 PRODUCT_ID = 0x193B
-VENDOR_USAGE_PAGE = 0x0000
+# The device has two HID collections; the AniMe one is usage_page=0xFF31, usage=0x80.
+# (The other, 0xFF89/0x10, is the 16-byte feature report — unused here.)
+ANIME_USAGE_PAGE = 0xFF31
+ANIME_USAGE = 0x80
 
 REPORT_ID = 0x5E
 REPORT_SIZE = 640

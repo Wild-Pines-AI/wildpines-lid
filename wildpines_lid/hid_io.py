@@ -2,7 +2,10 @@
 
 from __future__ import annotations
 
-import hid
+# Use the hidraw backend (Linux /dev/hidrawN) rather than hid (libusb). The
+# libusb backend requires root or /dev/bus/usb/* ACL; hidraw honors our udev
+# rule (TAG+=uaccess on hidraw*) so becky can open the device without sudo.
+import hidraw as hid
 
 from . import protocol
 
@@ -19,13 +22,13 @@ def find_lid_device() -> dict:
             f"No HID device found for {protocol.VENDOR_ID:04x}:{protocol.PRODUCT_ID:04x}. "
             f"Is this machine a Strix SCAR 18 G835LX with the lid LED hardware present?"
         )
-    vendor = [d for d in candidates if d["usage_page"] == protocol.VENDOR_USAGE_PAGE]
-    if not vendor:
-        raise DeviceNotFound(
-            f"Found {len(candidates)} interface(s) but none are vendor-specific. "
-            f"Enumeration: {candidates}"
-        )
-    return vendor[0]
+    anime = [d for d in candidates
+             if d["usage_page"] == protocol.ANIME_USAGE_PAGE
+             and d["usage"] == protocol.ANIME_USAGE]
+    if not anime:
+        # Fall back to any interface — hidraw may not expose usage page per collection
+        anime = [candidates[0]]
+    return anime[0]
 
 
 class LidDevice:

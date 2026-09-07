@@ -1,5 +1,9 @@
 # wildpines-lid
 
+**Rules only in this file.** Not architecture, not status, not repo facts, not changelog:
+those live in `README.md`. Before adding a line, ask whether it would go stale when the code
+changes. If yes, it was never a rule and it belongs somewhere else.
+
 Userspace Python HID driver for the ROG Strix SCAR 18 (G835LX) AniMe Vision lid display.
 Hardware, protocol, geometry and module layout are in `README.md`.
 
